@@ -2,10 +2,14 @@ import { Router } from "express";
 
 const userRouter = Router();
 
-// ROUTES/Endpoints
-// Get all users
-// Method: GET
-// Endpoint: /
+/**
+ * @route   /api/v1/users
+ * @desc    User Management Routes
+ */
+
+// @route   GET /api/v1/users
+// @desc    Get all users
+// @access  Private (Admin or Authenticated Only)
 userRouter.get('/', (req, res) => {
     res.send([
         {
@@ -13,12 +17,12 @@ userRouter.get('/', (req, res) => {
             name: "Prosper Mbuma",
             email: "prospermbuma@yahoo.com"
         },
-         {
+        {
             id: 2,
             name: "Josiana Mbuma",
             email: "josianambuma@yahoo.com"
         },
-         {
+        {
             id: 3,
             name: "Precious Mbuma",
             email: "preciousmbuma@yahoo.com"
@@ -26,32 +30,32 @@ userRouter.get('/', (req, res) => {
     ]);
 });
 
-// Get user by id
-// Method: GET
-// Endpoint: /:id
+// @route   GET /api/v1/users/:id
+// @desc    Get user details by ID
+// @access  Private (Self or Admin)
 userRouter.get('/:id', (req, res) => {
-    res.send({title: 'Get user details'});
+    res.send({ title: 'Get user details' });
 });
 
-// Create new user
-// Method: POST
-// Endpoint: /
+// @route   POST /api/v1/users
+// @desc    Create a new user
+// @access  Public (for registration)
 userRouter.post('/', (req, res) => {
-    res.send({title: 'Create new user'});
+    res.send({ title: 'Create new user' });
 });
 
-// Update user
-// Method: PUT
-// Endpoint: /:id
+// @route   PUT /api/v1/users/:id
+// @desc    Update user by ID
+// @access  Private (Self or Admin)
 userRouter.put('/:id', (req, res) => {
-    res.send({title: 'Update user'});
+    res.send({ title: 'Update user' });
 });
 
-// Delete user
-// Method: DELETE
-// Endpoint: /:id
+// @route   DELETE /api/v1/users/:id
+// @desc    Delete user by ID
+// @access  Private (Admin)
 userRouter.delete('/:id', (req, res) => {
-    res.send({title: 'Delete user'});
+    res.send({ title: 'Delete user' });
 });
 
 export default userRouter;
