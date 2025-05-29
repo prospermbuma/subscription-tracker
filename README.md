@@ -9,6 +9,11 @@ npm install --save-dev nodemon
 npm install dotenv
 npx eslint --init
 ```
+## Start Server
+Run:
+```
+npm run server
+```
 ## Database Installation
 Run:
 ```
