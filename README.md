@@ -9,3 +9,9 @@ npm install --save-dev nodemon
 npm install dotenv
 npx eslint --init
 ```
+## Database Installation
+Run:
+```
+npm install mongodb
+npm install mongoose
+```

@@ -4,7 +4,7 @@ import { PORT } from './config/env.js';
 // Routes
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
-import SubscriptionRouter from './routes/subscription.routes.js';
+import subscriptionRouter from './routes/subscription.routes.js';
 
 // Configuration
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 // API Endpoints Middlewares
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/subscriptions', SubscriptionRouter);
+app.use('/api/v1/subscriptions', subscriptionRouter);
 
 // Default API Endpoints
 app.get('/', (req, res) => {
