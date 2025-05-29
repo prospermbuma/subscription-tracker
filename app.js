@@ -1,10 +1,8 @@
 import express from 'express';
-import 'dotenv/config';
+import { PORT } from './config/env.js';
 
 // Configuration
 const app = express();
-// eslint-disable-next-line no-undef
-const PORT = process.env.PORT || 3000;
 
 // Middleware
 // Body parser middleware
