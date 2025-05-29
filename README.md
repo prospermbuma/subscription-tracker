@@ -5,4 +5,5 @@ The API that tracks user subscriptions of any real subscription based applicatio
 Run:
 ```
 npx express-generator --no-view --git ./
+npm install --save-dev nodemon
 ```
