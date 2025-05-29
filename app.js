@@ -1,5 +1,7 @@
 import express from 'express';
 import { PORT } from './config/env.js';
+
+// Routes
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
 import SubscriptionRouter from './routes/subscription.routes.js';
@@ -13,13 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // API Endpoints Middlewares
-// authRouter
 app.use('/api/v1/auth', authRouter);
-
-// userRouter
 app.use('/api/v1/users', userRouter);
-
-// subscriptionRouter
 app.use('/api/v1/subscriptions', SubscriptionRouter);
 
 // Default API Endpoints

@@ -38,4 +38,25 @@ SubscriptionRouter.delete('/:id', (req, res) => {
     res.send({title: 'Delete subscription'});
 });
 
+// Get all subscriptions of the specific user
+// Method: GET
+// Endpoint: /user/:id
+SubscriptionRouter.get('/user/:id', (req, res) => {
+    res.send({title: 'Get all user subscriptions'});
+});
+
+// Cance subscription
+// Method: PUT
+// Endpoint: /:id/cancel
+SubscriptionRouter.put('/:id/cancel', (req, res) => {
+    res.send({title: 'Cancel subscription'});
+});
+
+// Get all upcoming renewals
+// Method: GET
+// Endpoint: /upcoming-renewals
+SubscriptionRouter.get('/upcoming-renewals', (req, res) => {
+    res.send({title: 'Get upcoming renewals'});
+});
+
 export default SubscriptionRouter;
