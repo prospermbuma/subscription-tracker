@@ -15,3 +15,10 @@ Run:
 npm install mongodb
 npm install mongoose
 ```
+
+## Auth Setup
+Run:
+```
+npm install jsonwebtoken
+npm install bcryptjs
+```
