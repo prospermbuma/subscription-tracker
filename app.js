@@ -3,6 +3,7 @@ import 'dotenv/config';
 
 // Configuration
 const app = express();
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -12,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // API Endpoints
 app.get('/', (req, res) => {
-    res.send('API WORKING');
+    res.send('Welcome to the Subscription Tracker API!');
 });
 
 app.get('/api/users', (req, res) => {
@@ -36,4 +37,6 @@ app.get('/api/users', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+app.listen(PORT, () => console.log(`Subscription Tracker API is running on port ${PORT}`));
+
+export default app;
