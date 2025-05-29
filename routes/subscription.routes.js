@@ -27,7 +27,7 @@ SubscriptionRouter.post('/', (req, res) => {
 // Update subscription
 // Method: PUT
 // Endpoint: /:id
-SubscriptionRouter.get('/:id', (req, res) => {
+SubscriptionRouter.put('/:id', (req, res) => {
     res.send({title: 'Update subscription'});
 });
 
