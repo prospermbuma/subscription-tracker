@@ -43,7 +43,7 @@ userRouter.post('/', (req, res) => {
 // Update user
 // Method: PUT
 // Endpoint: /:id
-userRouter.get('/:id', (req, res) => {
+userRouter.put('/:id', (req, res) => {
     res.send({title: 'Update user'});
 });
 
