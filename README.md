@@ -6,4 +6,6 @@ Run:
 ```
 npx express-generator --no-view --git ./
 npm install --save-dev nodemon
+npm install dotenv
+npx eslint --init
 ```
