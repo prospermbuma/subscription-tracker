@@ -1,11 +1,12 @@
 import express from 'express';
 import { PORT } from './config/env.js';
+import dbConnection from './database/mongodb.js';
+import cookieParser from 'cookie-parser';
 
 // Routes
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
 import subscriptionRouter from './routes/subscription.routes.js';
-import dbConnection from './database/mongodb.js';
 
 // Middlewares
 import errorMiddleware from './middlewares/error.middleware.js';
@@ -17,6 +18,7 @@ const app = express();
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // API Endpoints middlewares
 app.use('/api/v1/auth', authRouter);
