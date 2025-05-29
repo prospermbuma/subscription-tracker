@@ -5,8 +5,8 @@ const userRouter = Router();
 // ROUTES/Endpoints
 // Get all users
 // Method: GET
-// Endpoint: /users
-userRouter.get('/users', (req, res) => {
+// Endpoint: /
+userRouter.get('/', (req, res) => {
     res.send([
         {
             id: 1,
@@ -28,7 +28,28 @@ userRouter.get('/users', (req, res) => {
 
 // Get user by id
 // Method: GET
-// Endpoint: /users/:id
+// Endpoint: /:id
 userRouter.get('/:id', (req, res) => {
     res.send({title: 'Get user details'});
+});
+
+// Create new user
+// Method: POST
+// Endpoint: /
+userRouter.post('/', (req, res) => {
+    res.send({title: 'Create new user'});
+});
+
+// Update user
+// Method: PUT
+// Endpoint: /:id
+userRouter.get('/:id', (req, res) => {
+    res.send({title: 'Update user'});
+});
+
+// Delete user
+// Method: DELETE
+// Endpoint: /:id
+userRouter.delete('/:id', (req, res) => {
+    res.send({title: 'Delete user'});
 });
