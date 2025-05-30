@@ -7,10 +7,21 @@ export const getUsers = async (req, res, next) => {
 
         res.status(200).json({
             success: true,
-            message: 'Users List',
-            data: {
-                users,
-            }
+            data: { users }
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+// Get user by ID
+export const getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById();
+
+        res.status(200).json({
+            success: true,
+            data: { user }
         });
     } catch (error) {
         next(error);
