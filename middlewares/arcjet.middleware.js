@@ -1,8 +1,11 @@
 import aj from "../config/arcjet.js";
 import { isSpoofedBot } from "@arcjet/inspect";
+// import { NODE_ENV } from "../config/env.js";
 
 const arcjetMiddleware = async (req, res, next) => {
     try {
+        //if (NODE_ENV !== 'production') return next(); // Skip Arcjet in dev
+
         const decision = await aj.protect(req, { requested: 1 }); // Take one token from a bucket per each request
         // console.log("Arcjet decision: ", decision);
 
