@@ -2,6 +2,7 @@ import express from 'express';
 import { PORT } from './config/env.js';
 import dbConnection from './database/mongodb.js';
 import cookieParser from 'cookie-parser';
+import arcjetMiddleware from './middlewares/arcjet.middleware.js';
 
 // Routes
 import userRouter from './routes/user.routes.js';
@@ -27,6 +28,9 @@ app.use('/api/v1/subscriptions', subscriptionRouter);
 
 // Error middleware
 app.use(errorMiddleware);
+
+// Rate Limiting middleware
+app.use(arcjetMiddleware);
 
 // Default API Endpoints
 app.get('/', (req, res) => {
