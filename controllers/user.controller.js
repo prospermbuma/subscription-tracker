@@ -5,10 +5,7 @@ export const getUsers = async (req, res, next) => {
     try {
         const users = await User.find();
 
-        res.status(200).json({
-            success: true,
-            data: { users }
-        });
+        res.status(200).json({ success: true, data: { users } });
     } catch (error) {
         next(error);
     }
@@ -19,8 +16,7 @@ export const getUser = async (req, res, next) => {
     try {
         const userId = req.params.id
 
-        const user = await User.findById(userId);
-        // const user = await User.findOne({ _id: userId });
+        const user = await User.findById(userId).select('-password'); // Retrieves all user specific data except password.
 
         if (!user) {
             const error = new Error('User not found');
@@ -28,10 +24,7 @@ export const getUser = async (req, res, next) => {
             throw error;
         }
 
-        res.status(200).json({
-            success: true,
-            data: { user }
-        });
+        res.status(200).json({ success: true, data: { user } });
     } catch (error) {
         next(error);
     }
