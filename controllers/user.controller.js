@@ -17,7 +17,16 @@ export const getUsers = async (req, res, next) => {
 // Get user by ID
 export const getUser = async (req, res, next) => {
     try {
-        const user = await User.findById();
+        const userId = req.params.id
+
+        const user = await User.findById(userId);
+        // const user = await User.findOne({ _id: userId });
+
+        if (!user) {
+            const error = new Error('User not found');
+            error.statusCode = 404;
+            throw error;
+        }
 
         res.status(200).json({
             success: true,
