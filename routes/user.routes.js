@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers, getUser } from "../controllers/user.controller.js";
+import { getUsers, getUser, deleteUser } from "../controllers/user.controller.js";
 
 const userRouter = Router();
 
@@ -35,8 +35,6 @@ userRouter.put('/:id', (req, res) => {
 // @route   DELETE /api/v1/users/:id
 // @desc    Delete user by ID
 // @access  Private (Admin)
-userRouter.delete('/:id', (req, res) => {
-    res.send({ title: 'Delete user' });
-});
+userRouter.delete('/:id', deleteUser);
 
 export default userRouter;
