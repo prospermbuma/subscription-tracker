@@ -3,7 +3,7 @@ import { isSpoofedBot } from "@arcjet/inspect";
 
 const arcjetMiddleware = async (req, res, next) => {
     try {
-        const decision = await aj.protect(req, { requested: 1 });
+        const decision = await aj.protect(req, { requested: 1 }); // Take one token from a bucket per each request
         console.log("Arcjet decision", decision);
 
         if (decision.isDenied()) {
