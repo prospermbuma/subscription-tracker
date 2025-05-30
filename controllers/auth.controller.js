@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
 import { JWT_EXPIRES_IN, JWT_SECRET, NODE_ENV } from "../config/env.js";
 
+// Sign Up Logics
 export const SignUp = async (req, res, next) => {
     /**
     Peform atomic updates (Atomic Operations).
@@ -61,6 +62,7 @@ export const SignUp = async (req, res, next) => {
     }
 }
 
+// Sign In Logics
 export const SignIn = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -98,6 +100,7 @@ export const SignIn = async (req, res, next) => {
     }
 }
 
+// Sign Out Logics
 export const SignOut = async (req, res, next) => {
     try {
         // Clear JWT cookie
