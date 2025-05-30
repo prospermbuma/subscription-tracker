@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { getUsers } from "../controllers/user.controller.js";
 
 const userRouter = Router();
 
@@ -10,25 +11,7 @@ const userRouter = Router();
 // @route   GET /api/v1/users
 // @desc    Get all users
 // @access  Private (Admin or Authenticated Only)
-userRouter.get('/', (req, res) => {
-    res.send([
-        {
-            id: 1,
-            name: "Prosper Mbuma",
-            email: "prospermbuma@yahoo.com"
-        },
-        {
-            id: 2,
-            name: "Josiana Mbuma",
-            email: "josianambuma@yahoo.com"
-        },
-        {
-            id: 3,
-            name: "Precious Mbuma",
-            email: "preciousmbuma@yahoo.com"
-        },
-    ]);
-});
+userRouter.get('/', getUsers);
 
 // @route   GET /api/v1/users/:id
 // @desc    Get user details by ID
