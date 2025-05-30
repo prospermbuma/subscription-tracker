@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers } from "../controllers/user.controller.js";
+import { getUsers, getUser } from "../controllers/user.controller.js";
 
 const userRouter = Router();
 
@@ -16,9 +16,7 @@ userRouter.get('/', getUsers);
 // @route   GET /api/v1/users/:id
 // @desc    Get user details by ID
 // @access  Private (Self or Admin)
-userRouter.get('/:id', (req, res) => {
-    res.send({ title: 'Get user details' });
-});
+userRouter.get('/:id', getUser);
 
 // @route   POST /api/v1/users
 // @desc    Create a new user
