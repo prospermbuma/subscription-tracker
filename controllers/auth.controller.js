@@ -90,7 +90,7 @@ export const SignIn = async (req, res, next) => {
             message: 'User signed in successfully',
             data: {
                 token,
-                user
+                user,
             }
         });
     } catch (error) {
