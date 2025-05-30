@@ -31,4 +31,5 @@ npm install bcryptjs
 Run:
 ```
 npm install @arcjet/node
+npm install @arcjet/inspect
 ```
