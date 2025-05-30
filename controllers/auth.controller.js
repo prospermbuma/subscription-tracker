@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
-import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js";
+import { JWT_EXPIRES_IN, JWT_SECRET, NODE_ENV } from "../config/env.js";
 
 export const SignUp = async (req, res, next) => {
     /**
@@ -99,5 +99,21 @@ export const SignIn = async (req, res, next) => {
 }
 
 export const SignOut = async (req, res, next) => {
-    
+    try {
+        // Clear JWT cookie
+        // res.clearCookie('token'); // 'token' is the cookie name used to store the JWT
+
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: NODE_ENV === 'development',
+            sameSite: 'strict',
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: 'User signed out successfully'
+        });
+    } catch (error) {
+        next(error); // Pass error to global error handler if any
+    }
 }
