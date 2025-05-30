@@ -27,3 +27,8 @@ Run:
 npm install jsonwebtoken
 npm install bcryptjs
 ```
+## Rate Limiting Setup
+Run:
+```
+npm install @arcjet/node
+```
