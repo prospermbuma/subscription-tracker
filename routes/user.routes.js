@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getUsers, getUser, deleteUser } from "../controllers/user.controller.js";
+import authorize from "../middlewares/auth.middleware.js";
 
 const userRouter = Router();
 
@@ -16,7 +17,7 @@ userRouter.get('/', getUsers);
 // @route   GET /api/v1/users/:id
 // @desc    Get user details by ID
 // @access  Private (Self or Admin)
-userRouter.get('/:id', getUser);
+userRouter.get('/:id', authorize, getUser);
 
 // @route   POST /api/v1/users
 // @desc    Create a new user
