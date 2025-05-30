@@ -4,20 +4,21 @@ import { isSpoofedBot } from "@arcjet/inspect";
 const arcjetMiddleware = async (req, res, next) => {
     try {
         const decision = await aj.protect(req, { requested: 1 }); // Take one token from a bucket per each request
-        console.log("Arcjet decision", decision);
+        // console.log("Arcjet decision: ", decision);
 
         if (decision.isDenied()) {
-            if (decision.reason.isRateLimit()) { return res.status(429).json({ error: 'Rate limit exceeded' }); }
-            if (decision.reason.isBot()) { return res.status(403).json({ error: 'Bot detected' }); }
+            console.log(decision.reason);
+            if (decision.reason.isRateLimit()) return res.status(429).json({ error: 'Rate limit exceeded' });
+            if (decision.reason.isBot()) return res.status(403).json({ error: 'Bot detected' });
 
             return res.status(403).json({ error: 'Access denied' });
-        } else if (decision.results.some(isSpoofedBot())) {
+        } else if (decision.results.some(isSpoofedBot)) {
             return res.status(403).json({ error: 'Access denied' });
         }
 
         next();
     } catch (error) {
-        console.error(`Arcjet Middleware Error: ${error}`);
+        console.log(`Arcjet Middleware Error: ${error}`);
         next(error);
     }
 }

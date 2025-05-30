@@ -21,6 +21,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// Rate Limiting middleware
+app.use(arcjetMiddleware);
+
 // API Endpoints middlewares
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
@@ -28,9 +31,6 @@ app.use('/api/v1/subscriptions', subscriptionRouter);
 
 // Error middleware
 app.use(errorMiddleware);
-
-// Rate Limiting middleware
-app.use(arcjetMiddleware);
 
 // Default API Endpoints
 app.get('/', (req, res) => {
