@@ -43,3 +43,8 @@ Run:
 ```
 npm install dayjs
 ```
+## Local QStash Server Setup
+Run:
+```
+npx @upstash/qstash-cli dev
+```
