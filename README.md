@@ -33,3 +33,8 @@ Run:
 npm install @arcjet/node
 npm install @arcjet/inspect
 ```
+## Upstash Workflow Setup
+Run:
+```
+npm install @upstash/workflow
+```
