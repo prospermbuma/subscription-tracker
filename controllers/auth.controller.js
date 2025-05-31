@@ -43,6 +43,13 @@ export const SignUp = async (req, res, next) => {
         // Generate token for a user to be able to sign-in
         const token = jwt.sign({ userId: newUsers[0]._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
+        // Set the JWT token in a secure cookie
+        res.cookie('authToken', token, {
+            httpOnly: true,
+            secure: NODE_ENV === 'production', // only secure in production
+            sameSite: 'strict',
+        });
+
         await session.commitTransaction();
         session.endSession();
 
@@ -87,6 +94,13 @@ export const SignIn = async (req, res, next) => {
 
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
+        // Set the JWT token in a secure cookie
+        res.cookie('authToken', token, {
+            httpOnly: true,
+            secure: NODE_ENV === 'production', // only secure in production
+            sameSite: 'strict',
+        });
+
         res.status(200).json({
             success: true,
             message: 'User signed in successfully',
@@ -108,7 +122,7 @@ export const SignOut = async (req, res, next) => {
 
         res.clearCookie('token', {
             httpOnly: true,
-            secure: NODE_ENV === 'development',
+            secure: NODE_ENV === 'production',
             sameSite: 'strict',
         });
 
