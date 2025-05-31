@@ -44,6 +44,11 @@ export const SignUp = async (req, res, next) => {
         const token = jwt.sign({ userId: newUsers[0]._id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 
         // Set the JWT token in a secure cookie
+        /**
+         * httpOnly: true	- The cookie can’t be accessed by JavaScript on the frontend. Helps prevent XSS attacks.
+         * secure: true	- The cookie is only sent over HTTPS. Use this in production.
+         * sameSite: 'strict' - Prevents the browser from sending the cookie with cross-site requests. Protects against CSRF attacks.
+         */
         res.cookie('authToken', token, {
             httpOnly: true,
             secure: NODE_ENV === 'production', // only secure in production
