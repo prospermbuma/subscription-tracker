@@ -7,10 +7,17 @@ const authorize = async (req, res, next) => {
         // Get access to user' token
         let token;
 
+        // 1. Try getting the token from the Authorization header (e.g., Bearer <token>)
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             token = req.headers.authorization.split(' ')[1];
         }
 
+        // 2. If not found in headers, try from cookies
+        if (!token && req.cookies && req.cookies.authToken) {
+            token = req.cookies.authToken;
+        }
+
+        // 3. If No token found
         if (!token) return res.status(401).json({ message: 'Unauthorized' });
 
         // Verify the token if it exists
