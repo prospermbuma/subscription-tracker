@@ -8,55 +8,52 @@ const REMINDERS = [7, 5, 2, 1];
 
 // Send Reminders
 export const sendReminders = serve(async (context) => {
-    try {
-        const { subscriptionId } = context.requestPayload;
-        const subscription = await fetchSubscription(context, subscriptionId);
+    const { subscriptionId } = context.requestPayload;
 
-        if (!subscription || subscription.status !== 'active') return;
+    // Step 1: Fetch Subscription
+    const subscription = await fetchSubscription(context, subscriptionId);
+    if (!subscription || subscription.status !== 'active') return;
 
-        const renewalDate = dayjs(subscription.renewalDate);
+    const renewalDate = dayjs(subscription.renewalDate);
 
-        // Check if the renewal date is before the current date and time
-        if (renewalDate.isBefore(dayjs())) {
-            console.log(`Renewal date has passed for subscription ${subscriptionId}. Stopping workflow.`);
-            return; // Exit out of this workflow
+    // Check if the renewal date is before the current date and time
+    if (renewalDate.isBefore(dayjs())) {
+        console.log(`Renewal date has passed for subscription ${subscriptionId}. Stopping workflow.`);
+        return; // Exit out of this workflow
+    }
+
+    // Step 2: Schedule & Send Reminders - Loop through reminder days (7, 5, 2 , 1)
+    for (const daysBefore of REMINDERS) {
+        const reminderDate = renewalDate.subtract(daysBefore, 'day');
+
+        // Check if the remider date if after current date and time
+        if (reminderDate.isAfter(dayjs())) {
+            // Put reminder to sleep
+            await sleepUntilReminder(context, `Reminder ${daysBefore} days before`, reminderDate);
         }
 
-        // Loop through reminder days (7, 5, 2 , 1)
-        for (const daysBefore of REMINDERS) {
-            const reminderDate = renewalDate.subtract(daysBefore, 'day');
-
-            // Check if the remider date if after current date and time
-            if (reminderDate.isAfter(dayjs())) {
-                // Put reminder to sleep
-                await sleepUntilReminder(context, `Reminder ${daysBefore} days before`, reminderDate);
-            }
-
-            // If NOT then Trigger the reminder
-            await triggerReminder(context,`Reminder ${daysBefore} days before`);
-        }
-    } catch (error) {
-        console.log("Error sending reminders", error);
+        // If NOT then Trigger the reminder
+        await triggerReminder(context, `Reminder ${daysBefore} days before`);
     }
 });
 
-// Fetch Subscription
+// Fetch Subscription using `context.run`
 const fetchSubscription = async (context, subscriptionId) => {
     return await context.run('get subscription', async () => {
-        return Subscription.findById(subscriptionId).populate('user', 'name email');
-    })
+        return await Subscription.findById(subscriptionId).populate('user', 'name email');
+    });
 }
 
-// Put reminder to sleep until its day and time to trigger
+// Sleep until the exact reminder date - Put reminder to sleep until its day and time to trigger
 const sleepUntilReminder = async (context, label, date) => {
     console.log(`Sleep until ${label} reminder at ${date}`);
     await context.sleepUntil(label, date.toDate());
 }
 
-// Trigger Reminder
+// Trigger the reminder safely inside `context.run`
 const triggerReminder = async (context, label) => {
     return await context.run(label, () => {
         console.log(`Triggering ${label} reminder`);
-        // Send email, SMS, Push notificarion, etc.
+        // Add real logic here e.g., send email/SMS/push-notification
     });
 }
