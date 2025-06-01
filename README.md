@@ -69,7 +69,7 @@ Run:
 ```
 npx @upstash/qstash-cli dev
 ```
-## ✉ Email Sender Installation
+## 📧 Email Sender Installation
 Run:
 ```
 npm install nodemailer
