@@ -1,5 +1,5 @@
 # Subscription Tracker
-The API that tracks user subscriptions of any real subscription based application.
+The API that tracks user's subscriptions of any real subscription-based application.
 
 ## Project Setup
 Run:
