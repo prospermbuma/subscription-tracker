@@ -67,8 +67,8 @@ const subscriptionSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Auto-calculate the renewal date if missing before the document is saved into the database.
-subscriptionSchema.pre('save', function(next) {
-    if(!this.renewalDate) {
+subscriptionSchema.pre('save', function (next) {
+    if (!this.renewalDate) {
         const renewalPeriods = {
             daily: 1,
             weekly: 7,
@@ -82,12 +82,15 @@ subscriptionSchema.pre('save', function(next) {
 
     // Auto-update the status if renewal date has passed
     if (this.renewalDate < new Date()) {
-        this.staus = 'expired';
+        this.status = 'expired';
     }
 
     // Proceed with the creation of subscription document to the database
     next();
 });
+
+// Indexes to improve query performance
+subscriptionSchema.index({ user: 1 });
 
 // Subscription Model
 const Subscription = mongoose.model('Subscription', subscriptionSchema);
